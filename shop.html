@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to shop page if needed */
+        .shop-header {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .shop-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+        .shop-header p {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .filters-and-sorting { /* Placeholder for future filter/sort options */
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: right; /* Or left, depending on design */
+        }
+        .filters-and-sorting select, .filters-and-sorting button {
+            padding: 8px 12px;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+          <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html" class="active">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="shop-header">
+            <div class="container">
+                <h1>Our T-Shirt Collection</h1>
+                <p>Browse through our exclusive range of wild t-shirts.</p>
+            </div>
+        </section>
+
+        <section class="shop-categories">
+            <div class="container">
+                <a href="shop-men.html" class="btn btn-primary category-btn">Shop for Men</a>
+                <a href="shop-women.html" class="btn btn-primary category-btn">Shop for Women</a>
+            </div>
+        </section>
+
+        <div class="container shop-page-layout">
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+
+
+                <div class="filter-group">
+                    <h4>Price</h4>
+                    <div class="price-filter">
+                        <label for="priceRangeAll">Range: ₹200 - ₹</label><span id="priceValueAll">500</span>
+                        <input type="range" id="priceRangeAll" name="priceRangeAll" min="200" max="500" value="500" class="price-slider">
+                    </div>
+                </div>
+
+            </aside>
+            
+            <main class="product-listing-area">
+                 <div class="sorting-options">
+                     <select name="sort-by">
+                        <option value="default">Default Sorting</option>
+                        <option value="price-low-high">Price: Low to High</option>
+                        <option value="price-high-low">Price: High to Low</option>
+                        <option value="newest">Newest Arrivals</option>
+                    </select>
+                </div>
+                <section class="product-section">
+                <!-- Product grid follows -->
+                <!-- Re-using .product-grid and .product-card from styles.css -->
+                <div class="product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <img src="imagestiger strike tee (shop).jpeg" alt="Cool Tiger T-shirt">
+                        <h3>Tiger Strike Tee</h3>
+                        <p class="product-description">A bold t-shirt featuring a striking tiger design. Made from 100% cotton.</p>
+                        <p class="price">Price: ₹350</p>
+                        <a href="product-detail.html?productId=tiger-strike-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('tiger-strike-tee')">Add to Cart</button>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <img src="wolf howl (shop).webp" alt="Wolf Howl T-shirt">
+                        <h3>Wolf Howl Tee</h3>
+                        <p class="product-description">Comfortable and stylish t-shirt with a majestic wolf print.</p>
+                        <p class="price">Price: ₹320</p>
+                        <a href="product-detail.html?productId=wolf-howl-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('wolf-howl-tee')">Add to Cart</button>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <span class="badge new">New</span>
+                        <img src="eagle flight(shop).jpg" alt="Eagle Flight T-shirt">
+                        <h3>Eagle Flight Tee</h3>
+                        <p class="product-description">Feel the freedom with this stunning eagle graphic t-shirt.</p>
+                        <p class="price">Price: ₹380</p>
+                        <a href="product-detail.html?productId=eagle-flight-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('eagle-flight-tee')">Add to Cart</button>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <img src="forest.jpeg" alt="Forest Spirit T-shirt">
+                        <h3>Forest Spirit Tee</h3>
+                        <p class="product-description">Connect with nature with this serene forest-themed t-shirt.</p>
+                        <p class="price">Price: ₹340</p>
+                        <a href="product-detail.html?productId=forest-spirit-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('forest-spirit-tee')">Add to Cart</button>
+                    </div>
+                    <!-- Product 5 -->
+                    <div class="product-card">
+                        <img src="abstact line.jpeg" alt="Abstract Lines T-shirt">
+                        <h3>Abstract Lines Tee</h3>
+                        <p class="product-description">Modern and minimalist abstract design for a subtle statement.</p>
+                        <p class="price">Price: ₹280</p>
+                        <a href="product-detail.html?productId=abstract-lines-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('abstract-lines-tee')">Add to Cart</button>
+                    </div>
+                    <!-- Product 6 -->
+                    <div class="product-card">
+                        <span class="badge new">New</span>
+                        <img src="vintage roar shop.jpeg" alt="Vintage Roar T-shirt">
+                        <h3>Vintage Roar Tee</h3>
+                        <p class="product-description">A classic vintage design with a powerful roar graphic.</p>
+                        <p class="price">Price: ₹360</p>
+                        <a href="product-detail.html?productId=vintage-roar-tee" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('vintage-roar-tee')">Add to Cart</button>
+                    </div>
+                     <!-- Product 7 (from index.html example) -->
+                    <div class="product-card">
+                        <span class="badge new">New</span>
+                        <img src="ring.webp" alt="Ring (Accessory)">
+                        <h3>WildTee Ring</h3>
+                        <p class="product-description">Stylish accessory to complement your wild look.</p>
+                        <p class="price">Price: ₹200</p>
+                        <a href="product-detail.html?productId=wildtee-ring" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('wildtee-ring')">Add to Cart</button>
+                    </div>
+                    <!-- Product 8 (from index.html example) -->
+                    <div class="product-card">
+                        <img src="watch.jpg" alt="Watch (Accessory)">
+                        <h3>Adventure Watch</h3>
+                        <p class="product-description">Durable watch for all your adventures.</p>
+                        <p class="price">Price: ₹450</p>
+                        <a href="product-detail.html?productId=adventure-watch" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('adventure-watch')">Add to Cart</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterShop" name="ageConsentFooter">
+                        <label for="ageConsentFooterShop">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

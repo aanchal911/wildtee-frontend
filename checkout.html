@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to checkout page */
+        .checkout-page-header {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .checkout-page-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+
+        .checkout-container {
+            width: 90%;
+            max-width: 800px; /* Max width for checkout form and summary */
+            margin: 0 auto 40px auto;
+            display: flex;
+            gap: 30px; /* Space between form and summary */
+            align-items: flex-start;
+        }
+
+        .checkout-form-section, .order-summary-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .checkout-form-section {
+            flex: 2; /* Takes more space */
+        }
+        .checkout-form-section h2, .order-summary-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .checkout-form .form-group {
+            margin-bottom: 20px;
+        }
+        .checkout-form .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .checkout-form .form-group input[type="text"],
+        .checkout-form .form-group input[type="email"],
+        .checkout-form .form-group input[type="tel"],
+        .checkout-form .form-group select {
+            width: calc(100% - 22px); /* Account for padding */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .checkout-form .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .checkout-form .form-row .form-group {
+            flex: 1;
+        }
+
+        .order-summary-section {
+            flex: 1;
+        }
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95em;
+        }
+        .order-summary-item:last-of-type {
+            border-bottom: none;
+        }
+        .order-summary-item .item-name {
+            color: #555;
+        }
+        .order-summary-item .item-price {
+            font-weight: bold;
+            color: #333;
+        }
+        .order-total {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e91e63;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-total h3 {
+            font-size: 1.4em;
+            margin: 0;
+            color: #333;
+        }
+        .order-total .total-amount {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        .btn-place-order {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            margin-top: 25px;
+        }
+
+        /* Responsive adjustments for checkout */
+        @media (max-width: 768px) {
+            .checkout-container {
+                flex-direction: column;
+            }
+            .checkout-form-section, .order-summary-section {
+                width: 100%;
+                box-sizing: border-box; /* Ensure padding doesn't break layout */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+             <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="checkout-page-header">
+            <div class="container">
+                <h1>Checkout</h1>
+            </div>
+        </section>
+
+        <div class="checkout-container">
+            <section class="checkout-form-section">
+                <h2>Shipping & Billing Details</h2>
+                <form class="checkout-form" onsubmit="event.preventDefault(); placeOrder();">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Street Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">ZIP / Postal Code</label>
+                            <input type="text" id="zip" name="zip" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="IN">India</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            {/* Add more countries as needed */}
+                        </select>
+                    </div>
+                    
+                    <h2>Payment Information</h2>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="•••• •••• •••• ••••" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="•••" required>
+                        </div>
+                    </div>
+                     <button type="submit" class="btn btn-primary btn-place-order">Place Order</button>
+                </form>
+            </section>
+
+            <section class="order-summary-section">
+                <h2>Order Summary</h2>
+                <div id="checkoutOrderItems">
+                    <!-- Example item, will be populated by JS in a real app -->
+                    <div class="order-summary-item">
+                        <span class="item-name">Tiger Strike Tee (x1)</span>
+                        <span class="item-price">₹25.00</span>
+                    </div>
+                    <div class="order-summary-item">
+                        <span class="item-name">Wolf Howl Tee (x2)</span>
+                        <span class="item-price">₹44.00</span>
+                    </div>
+                </div>
+                <div class="order-summary-item">
+                    <span class="item-name">Subtotal</span>
+                    <span class="item-price" id="checkoutSubtotal">₹69.00</span>
+                </div>
+                <div class="order-summary-item">
+                    <span class="item-name">Shipping</span>
+                    <span class="item-price" id="checkoutShipping">FREE</span>
+                </div>
+                <div class="order-total">
+                    <h3>Total</h3>
+                    <span class="total-amount" id="checkoutTotal">₹69.00</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterCheckout" name="ageConsentFooter">
+                        <label for="ageConsentFooterCheckout">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // In a real application, cart data would be passed from cart.html or fetched from localStorage/backend
+        // For this demo, we'll keep the static summary but ensure the placeOrder function from script.js is called.
+        // The placeOrder function in script.js already handles the alert and redirection.
+
+        // Optional: Populate order summary dynamically if cart data was available
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     // const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        //     // const orderItemsContainer = document.getElementById('checkoutOrderItems');
+        //     // let subtotal = 0;
+        //     // if (cart.length > 0) {
+        //     //     orderItemsContainer.innerHTML = ''; // Clear static items
+        //     //     cart.forEach(item => {
+        //     //         const itemElement = document.createElement('div');
+        //     //         itemElement.classList.add('order-summary-item');
+        //     //         itemElement.innerHTML = `<span class="item-name">${item.name} (x${item.quantity})</span><span class="item-price">₹${(item.price * item.quantity).toFixed(2)}</span>`;
+        //     //         orderItemsContainer.appendChild(itemElement);
+        //     //         subtotal += item.price * item.quantity;
+        //     //     });
+        //     // }
+        //     // document.getElementById('checkoutSubtotal').textContent = `₹${subtotal.toFixed(2)}`;
+        //     // document.getElementById('checkoutTotal').textContent = `₹${subtotal.toFixed(2)}`; // Assuming free shipping
+        // });
+    </script>
+</body>
+</html>

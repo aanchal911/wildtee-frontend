@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Using similar styles to login page for consistency */
+        body.register-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fce4ec; /* Light pink background */
+        }
+
+        .register-container {
+            background-color: #fff;
+            padding: 30px 40px; /* Adjusted padding */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px; /* Slightly wider for more fields */
+            text-align: center;
+        }
+
+        .register-container h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .register-container .logo-redirect {
+            display: inline-block;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .register-container .logo-redirect:hover {
+            text-decoration: underline;
+        }
+
+        .register-container p {
+            margin-bottom: 20px; /* Adjusted margin */
+            color: #666;
+        }
+
+        .register-form input[type="text"],
+        .register-form input[type="email"],
+        .register-form input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .register-form .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            margin-top: 10px; /* Added margin-top */
+            margin-bottom: 20px;
+        }
+
+        .register-container .login-link {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .register-container .login-link a {
+            color: #e91e63;
+            font-weight: bold;
+        }
+        .register-container .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="register-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="register-container">
+        <!-- Removed <a href="index.html" class="logo-redirect">USHOP</a> -->
+        <h1>Create Your Account</h1>
+        <p>Join WildTee to discover amazing t-shirts!</p>
+        
+        <form class="register-form" onsubmit="event.preventDefault(); handleRegistration();">
+            <input type="text" name="fullName" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="password" name="password" placeholder="Create a password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm password" required>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+
+        <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+<footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterRegister" name="ageConsentFooter">
+                        <label for="ageConsentFooterRegister">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        function handleRegistration() {
+            // Basic validation example
+            const password = document.querySelector('input[name="password"]').value;
+            const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            console.log("Registration attempt...");
+            // In a real app, send data to server, then redirect
+            alert("Registration successful! Please login. (This is a demo)");
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

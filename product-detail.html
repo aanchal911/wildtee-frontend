@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Styles specific to product-detail.html */
+        .product-detail-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-images {
+            flex: 1;
+            max-width: 450px; /* Limit image area width */
+        }
+        .main-product-image img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .product-thumbnails {
+            display: flex;
+            gap: 10px;
+            justify-content: center; /* Or flex-start */
+        }
+        .product-thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .product-thumbnails img.active,
+        .product-thumbnails img:hover {
+            border-color: #e91e63;
+        }
+
+        .product-info {
+            flex: 1.5; /* Give more space to info */
+        }
+        .product-info h1 { /* Product Title */
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-info .brand-name {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        .product-info .price-section {
+            margin-bottom: 20px;
+        }
+        .product-info .current-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e91e63;
+            margin-right: 10px;
+        }
+        .product-info .original-price {
+            font-size: 1.1em;
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+        .product-info .discount-percentage {
+            font-size: 1.1em;
+            color: #4CAF50; /* Green for discount */
+            font-weight: bold;
+        }
+        .product-info .tax-info {
+            font-size: 0.85em;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .product-info .product-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .product-options .option-group {
+            margin-bottom: 20px;
+        }
+        .product-options .option-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        .product-options .size-options button,
+        .product-options .color-options .color-swatch {
+            padding: 8px 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #fff;
+            font-size: 0.95em;
+        }
+        .product-options .size-options button.active,
+        .product-options .size-options button:hover {
+            border-color: #e91e63;
+            background-color: #fce4ec; /* Light pink */
+        }
+        .product-options .color-options {
+            display: flex;
+            gap: 10px;
+        }
+        .product-options .color-swatch {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            border-radius: 50%;
+        }
+         .product-options .color-swatch.active {
+            border: 2px solid #e91e63;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            margin-top: 25px;
+        }
+        .product-actions .btn-add-to-bag {
+            flex-grow: 1;
+            background-color: #ffc107; /* Yellow like Bewakoof */
+            color: #333;
+            font-size: 1.1em;
+            padding: 12px;
+        }
+        .product-actions .btn-add-to-bag:hover {
+            background-color: #ffb300;
+        }
+        .product-actions .btn-wishlist {
+            padding: 12px 20px;
+            font-size: 1.1em;
+        }
+
+        .delivery-check {
+            margin-bottom: 20px;
+        }
+        .delivery-check label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .delivery-check input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 150px;
+        }
+
+        .product-meta-info {
+            margin-top: 20px;
+        }
+        .product-meta-info p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .product-meta-info .offer-tag {
+            background-color: #e91e63;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+        .product-rating .stars i {
+            color: #ffc107; /* Gold for stars */
+        }
+        .product-rating .reviews-link {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail-container {
+                flex-direction: column;
+            }
+            .product-images, .product-info {
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="product-detail-container">
+                <section class="product-images">
+                    <div class="main-product-image">
+                        <img src="placeholder-tshirt-large.png" alt="Product Main Image" id="mainImage">
+                    </div>
+                    <div class="product-thumbnails" id="productThumbnailsContainer">
+                        <!-- Thumbnails will be dynamically generated -->
+                    </div>
+                </section>
+
+                <section class="product-info">
+                    <p class="brand-name" id="brandName">WildTee Official Merchandise</p>
+                    <h1 id="productName">Product Name</h1>
+                    
+                    <div class="product-rating">
+                        <span class="stars" id="productRatingStars">
+                            <!-- Stars will be dynamically generated -->
+                        </span>
+                        <span id="productRatingText"></span> <!-- For "4.3 | 6 Reviews" -->
+                        <a href="#reviews" class="reviews-link" id="productReviewsLink"> Reviews</a>
+                    </div>
+
+                    <div class="price-section">
+                        <span class="current-price" id="currentPrice">₹0</span>
+                        <span class="original-price" id="originalPrice">₹0</span>
+                        <span class="discount-percentage" id="discountPercentage">0% OFF</span>
+                        <p class="tax-info" id="taxInfo">inclusive of all taxes</p>
+                    </div>
+
+                    <div class="product-meta-info">
+                        <p><span class="offer-tag" id="offerTag"></span></p>
+                        <p id="materialInfo">Material: </p>
+                        <p style="color: #e91e63; font-weight: bold;" id="specialNote"></p>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label for="size">Select Size <a href="#" style="float:right; font-size:0.8em; text-decoration:underline;">SIZE GUIDE</a></label>
+                            <div class="size-options" id="sizeOptionsContainer">
+                                <!-- Size buttons will be dynamically generated -->
+                            </div>
+                            <p style="font-size:0.8em; color:red; margin-top:5px;" id="stockLeftMessage"></p>
+                        </div>
+                        <div class="option-group">
+                            <label for="color">Select Color</label>
+                            <div class="color-options" id="colorOptionsContainer">
+                                <!-- Color swatches will be dynamically generated -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p><a href="#" style="font-size:0.9em; text-decoration:underline;">Couldn't Find Your Size? <i class="fas fa-bell"></i></a></p>
+
+                    <div class="product-actions">
+                        <button class="btn btn-add-to-bag" id="addToCartButton"><i class="fas fa-shopping-bag"></i> ADD TO CART</button>
+                        <a href="wishlist.html" class="btn btn-outline btn-wishlist"><i class="far fa-heart"></i> WISHLIST</a>
+                    </div>
+
+                    <div class="delivery-check">
+                        <label for="pincode">Check for Delivery Details</label>
+                        <input type="text" id="pincode" name="pincode" placeholder="Enter Pincode">
+                        <button class="btn btn-outline">CHECK</button>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h4>Product Description:</h4>
+                        <p id="productDescriptionText">Product description goes here.</p>
+                        <p><strong id="productFit">Fit:</strong><br><strong id="productMaterialDetail">Material:</strong></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterProductDetail" name="ageConsentFooter">
+                        <label for="ageConsentFooterProductDetail">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function changeMainImage(newSrc) {
+            document.getElementById('mainImage').src = newSrc;
+            // Optional: Add 'active' class to thumbnail
+            const thumbnails = document.querySelectorAll('.product-thumbnails img');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.src.includes(newSrc)) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+
+        // Size selection
+        const sizeOptions = document.querySelectorAll('.size-options button');
+        sizeOptions.forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.disabled) return;
+                sizeOptions.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Selected size:', this.getAttribute('data-size'));
+            });
+        });
+
+        // Color selection
+        const colorSwatches = document.querySelectorAll('.color-options .color-swatch');
+        colorSwatches.forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                colorSwatches.forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                // The changeMainImage function is now called directly via onclick attribute
+                // console.log('Selected color:', this.getAttribute('data-color'));
+                // console.log('Changing image to:', this.getAttribute('data-image'));
+            });
+        });
+
+        // Initialize first thumbnail as active if not already
+        const firstThumbnail = document.querySelector('.product-thumbnails img');
+        if (firstThumbnail && !firstThumbnail.classList.contains('active')) {
+            // Assuming the main image initially matches the first thumbnail or a default
+            // For robustness, you might want to set the first thumbnail's image as the main image on load
+            // and then mark it active.
+            // For now, just marking it active if no other is.
+            const activeThumb = document.querySelector('.product-thumbnails img.active');
+            if (!activeThumb) {
+                 firstThumbnail.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Comprehensive Product Data
+            const productCatalog = {
+                "womens-dementors-graphic": {
+                    name: "Women's Dementors Graphic Printed T-shirt",
+                    brand: "WildTee Official Merchandise",
+                    rating: { score: 4.3, reviews: 6 },
+                    price: { current: 449, original: 1149, discount: "60% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "BUY 3 FOR 999", material: "100% Cotton", note: "154 people bought this in the last 7 days" },
+                    images: {
+                        main: "placeholder-tshirt-large-black.png", // Default main image
+                        thumbnails: [
+                            { src: "placeholder-tshirt-thumb-black.png", mainSrc: "placeholder-tshirt-large-black.png", alt: "Thumbnail Black", color: "black" },
+                            { src: "placeholder-tshirt-thumb-navy.png", mainSrc: "placeholder-tshirt-large-navy.png", alt: "Thumbnail Navy", color: "navy" },
+                            { src: "placeholder-tshirt-thumb-green.png", mainSrc: "placeholder-tshirt-large-green.png", alt: "Thumbnail Green", color: "green" }
+                        ],
+                        colorSpecificImages: {
+                            "black": "placeholder-tshirt-large-black.png",
+                            "navy": "placeholder-tshirt-large-navy.png",
+                            "green": "placeholder-tshirt-large-green.png"
+                        }
+                    },
+                    description: "Official Harry Potter Merchandise by WildTee. Made with high-quality cotton for maximum comfort and durability. Features a glow-in-the-dark print.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 },
+                        { name: "M", active: true, disabled: false, stock: 4 },
+                        { name: "L", active: false, disabled: false, stock: 8 },
+                        { name: "XL", active: false, disabled: false, stock: 5 },
+                        { name: "2XL", active: false, disabled: false, stock: 3 },
+                        { name: "3XL", active: false, disabled: true, stock: 0 }
+                    ],
+                    colors: [
+                        { name: "black", hex: "#000000", defaultImage: "placeholder-tshirt-large-black.png", active: true },
+                        { name: "navy", hex: "#000080", defaultImage: "placeholder-tshirt-large-navy.png", active: false },
+                        { name: "green", hex: "#008000", defaultImage: "placeholder-tshirt-large-green.png", active: false }
+                    ],
+                    productIdForCart: "womens-dementors-graphic"
+                },
+                "womens-offshoulder-crop-1": {
+                    name: "Women's Off-Shoulder Crop",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.5, reviews: 12 },
+                    price: { current: 310, original: 500, discount: "38% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Festive Discount!", material: "95% Cotton, 5% Spandex", note: "Trendy new arrival!" },
+                    images: {
+                        main: "placeholder-croptop-women3.png",
+                        thumbnails: [
+                             { src: "placeholder-croptop-women3-thumb.png", mainSrc: "placeholder-croptop-women3.png", alt: "Thumbnail Pink", color: "pink" }
+                        ],
+                        colorSpecificImages: {
+                            "pink": "placeholder-croptop-women3.png" // Assuming one color for this example
+                        }
+                    },
+                    description: "Trendy off-shoulder crop top design. Perfect for a stylish and modern look. Made with comfortable stretch fabric.",
+                    fit: "Slim Fit",
+                    materialDetail: "95% Cotton, 5% Spandex",
+                    sizes: [
+                        { name: "XS", active: false, disabled: false, stock: 7 },
+                        { name: "S", active: true, disabled: false, stock: 15 },
+                        { name: "M", active: false, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: true, stock: 0 }
+                    ],
+                    colors: [
+                        { name: "pink", hex: "#FFC0CB", defaultImage: "placeholder-croptop-women3.png", active: true }
+                    ],
+                    productIdForCart: "womens-offshoulder-crop-1"
+                }, // <<< Added comma here
+                "mens-graphic-tee-1": {
+                    name: "Men's Classic Graphic Tee",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.2, reviews: 8 },
+                    price: { current: 299, original: 499, discount: "40% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "" },
+                    images: {
+                        main: "placeholder-tshirt-men1.png",
+                        thumbnails: [{ src: "placeholder-tshirt-men1.png", mainSrc: "placeholder-tshirt-men1.png", alt: "Men's Classic Graphic Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-men1.png" }
+                    },
+                    description: "A comfortable and stylish graphic t-shirt for men.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 },
+                        { name: "XXL", active: false, disabled: false, stock: 3 }
+                    ],
+                    colors: [{ name: "default", hex: "#333333", defaultImage: "placeholder-tshirt-men1.png", active: true }],
+                    productIdForCart: "mens-graphic-tee-1"
+                },
+                "mens-vneck-tee-1": {
+                    name: "Men's V-Neck Tee",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.0, reviews: 5 },
+                    price: { current: 249, original: 399, discount: "38% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-tshirt-men2.png",
+                        thumbnails: [{ src: "placeholder-tshirt-men2.png", mainSrc: "placeholder-tshirt-men2.png", alt: "Men's V-Neck Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-men2.png" }
+                    },
+                    description: "A modern V-neck t-shirt, perfect for a casual look.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#444444", defaultImage: "placeholder-tshirt-men2.png", active: true }],
+                    productIdForCart: "mens-vneck-tee-1"
+                },
+                "mens-performance-tee-1": {
+                    name: "Men's Performance Tee",
+                    brand: "WildTee Active",
+                    rating: { score: 4.5, reviews: 15 },
+                    price: { current: 349, original: 549, discount: "36% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Polyester Blend", note: "Ideal for workouts" },
+                    images: {
+                        main: "placeholder-tshirt-men3.png",
+                        thumbnails: [{ src: "placeholder-tshirt-men3.png", mainSrc: "placeholder-tshirt-men3.png", alt: "Men's Performance Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-men3.png" }
+                    },
+                    description: "Lightweight and breathable, ideal for workouts.",
+                    fit: "Athletic Fit",
+                    materialDetail: "90% Polyester, 10% Spandex",
+                     sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#555555", defaultImage: "placeholder-tshirt-men3.png", active: true }],
+                    productIdForCart: "mens-performance-tee-1"
+                },
+                "mens-basic-crew-1": {
+                    name: "Men's Basic Crew Tee",
+                    brand: "WildTee Essentials",
+                    rating: { score: 4.1, reviews: 7 },
+                    price: { current: 220, original: 300, discount: "27% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Everyday Comfort" },
+                    images: {
+                        main: "placeholder-tshirt-men4.png",
+                        thumbnails: [{ src: "placeholder-tshirt-men4.png", mainSrc: "placeholder-tshirt-men4.png", alt: "Men's Basic Crew Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-men4.png" }
+                    },
+                    description: "Essential crew neck t-shirt for everyday comfort.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                     sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 },
+                        { name: "XXL", active: false, disabled: false, stock: 3 }
+                    ],
+                    colors: [{ name: "default", hex: "#666666", defaultImage: "placeholder-tshirt-men4.png", active: true }],
+                    productIdForCart: "mens-basic-crew-1"
+                },
+                "mens-hoodie-1": {
+                    name: "Men's Classic Hoodie",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.6, reviews: 20 },
+                    price: { current: 499, original: 799, discount: "38% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Winter Special", material: "Cotton Blend", note: "Warm and Comfortable" },
+                    images: {
+                        main: "placeholder-hoodie-men1.png",
+                        thumbnails: [{ src: "placeholder-hoodie-men1.png", mainSrc: "placeholder-hoodie-men1.png", alt: "Men's Classic Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-men1.png" }
+                    },
+                    description: "Warm and comfortable classic hoodie.",
+                    fit: "Regular Fit",
+                    materialDetail: "80% Cotton, 20% Polyester",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#222222", defaultImage: "placeholder-hoodie-men1.png", active: true }],
+                    productIdForCart: "mens-hoodie-1"
+                },
+                "mens-zip-hoodie-1": {
+                    name: "Men's Zip-Up Hoodie",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.4, reviews: 12 },
+                    price: { current: 450, original: 699, discount: "36% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Versatile Style" },
+                    images: {
+                        main: "placeholder-hoodie-men2.png",
+                        thumbnails: [{ src: "placeholder-hoodie-men2.png", mainSrc: "placeholder-hoodie-men2.png", alt: "Men's Zip-Up Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-men2.png" }
+                    },
+                    description: "Versatile zip-up hoodie for all seasons.",
+                    fit: "Regular Fit",
+                    materialDetail: "80% Cotton, 20% Polyester",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#3A3A3A", defaultImage: "placeholder-hoodie-men2.png", active: true }],
+                    productIdForCart: "mens-zip-hoodie-1"
+                },
+                "mens-pullover-hoodie-1": {
+                    name: "Men's Pullover Hoodie",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.3, reviews: 9 },
+                    price: { current: 475, original: 749, discount: "37% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Soft & Cozy" },
+                    images: {
+                        main: "placeholder-hoodie-men3.png",
+                        thumbnails: [{ src: "placeholder-hoodie-men3.png", mainSrc: "placeholder-hoodie-men3.png", alt: "Men's Pullover Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-men3.png" }
+                    },
+                    description: "Soft pullover hoodie with front pocket.",
+                    fit: "Regular Fit",
+                    materialDetail: "80% Cotton, 20% Polyester",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#4B4B4B", defaultImage: "placeholder-hoodie-men3.png", active: true }],
+                    productIdForCart: "mens-pullover-hoodie-1"
+                },
+                "mens-graphic-hoodie-1": {
+                    name: "Men's Graphic Print Hoodie",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.7, reviews: 25 },
+                    price: { current: 500, original: 899, discount: "44% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Bold Graphic!", material: "Cotton Blend", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-hoodie-men4.png",
+                        thumbnails: [{ src: "placeholder-hoodie-men4.png", mainSrc: "placeholder-hoodie-men4.png", alt: "Men's Graphic Print Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-men4.png" }
+                    },
+                    description: "Hoodie with a bold WildTee graphic.",
+                    fit: "Regular Fit",
+                    materialDetail: "80% Cotton, 20% Polyester",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#1C1C1C", defaultImage: "placeholder-hoodie-men4.png", active: true }],
+                    productIdForCart: "mens-graphic-hoodie-1"
+                },
+                "mens-fullsleeve-1": {
+                    name: "Men's Full Sleeve Tee",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.2, reviews: 6 },
+                    price: { current: 320, original: 450, discount: "29% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Layered Look" },
+                    images: {
+                        main: "placeholder-fullsleeve-men1.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-men1.png", mainSrc: "placeholder-fullsleeve-men1.png", alt: "Men's Full Sleeve Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-men1.png" }
+                    },
+                    description: "Stylish full sleeve t-shirt for a layered look.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#777777", defaultImage: "placeholder-fullsleeve-men1.png", active: true }],
+                    productIdForCart: "mens-fullsleeve-1"
+                },
+                "mens-henley-fullsleeve-1": {
+                    name: "Men's Henley Full Sleeve",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.3, reviews: 11 },
+                    price: { current: 350, original: 499, discount: "30% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Classic Style" },
+                    images: {
+                        main: "placeholder-fullsleeve-men2.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-men2.png", mainSrc: "placeholder-fullsleeve-men2.png", alt: "Men's Henley Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-men2.png" }
+                    },
+                    description: "Classic Henley neck full sleeve t-shirt.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#888888", defaultImage: "placeholder-fullsleeve-men2.png", active: true }],
+                    productIdForCart: "mens-henley-fullsleeve-1"
+                },
+                "mens-striped-fullsleeve-1": {
+                    name: "Men's Striped Full Sleeve",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.0, reviews: 4 },
+                    price: { current: 330, original: 470, discount: "30% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Trendy Stripes" },
+                    images: {
+                        main: "placeholder-fullsleeve-men3.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-men3.png", mainSrc: "placeholder-fullsleeve-men3.png", alt: "Men's Striped Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-men3.png" }
+                    },
+                    description: "Trendy striped full sleeve t-shirt.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#999999", defaultImage: "placeholder-fullsleeve-men3.png", active: true }],
+                    productIdForCart: "mens-striped-fullsleeve-1"
+                },
+                "mens-graphic-fullsleeve-1": {
+                    name: "Men's Graphic Full Sleeve",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.4, reviews: 18 },
+                    price: { current: 375, original: 550, discount: "32% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Cool Graphic!", material: "100% Cotton", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-fullsleeve-men4.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-men4.png", mainSrc: "placeholder-fullsleeve-men4.png", alt: "Men's Graphic Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-men4.png" }
+                    },
+                    description: "Full sleeve tee with a cool WildTee graphic.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#AAAAAA", defaultImage: "placeholder-fullsleeve-men4.png", active: true }],
+                    productIdForCart: "mens-graphic-fullsleeve-1"
+                },
+                "mens-sleeveless-1": {
+                    name: "Men's Training Tank",
+                    brand: "WildTee Active",
+                    rating: { score: 4.1, reviews: 7 },
+                    price: { current: 200, original: 299, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Polyester Blend", note: "For Workouts" },
+                    images: {
+                        main: "placeholder-sleeveless-men1.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-men1.png", mainSrc: "placeholder-sleeveless-men1.png", alt: "Men's Training Tank", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-men1.png" }
+                    },
+                    description: "Breathable sleeveless tank for workouts.",
+                    fit: "Athletic Fit",
+                    materialDetail: "90% Polyester, 10% Spandex",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#BBBBBB", defaultImage: "placeholder-sleeveless-men1.png", active: true }],
+                    productIdForCart: "mens-sleeveless-1"
+                },
+                "mens-gym-vest-1": {
+                    name: "Men's Gym Vest",
+                    brand: "WildTee Active",
+                    rating: { score: 4.0, reviews: 3 },
+                    price: { current: 230, original: 350, discount: "34% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Active Wear" },
+                    images: {
+                        main: "placeholder-sleeveless-men2.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-men2.png", mainSrc: "placeholder-sleeveless-men2.png", alt: "Men's Gym Vest", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-men2.png" }
+                    },
+                    description: "Comfortable vest for gym and active wear.",
+                    fit: "Regular Fit",
+                    materialDetail: "95% Cotton, 5% Elastane",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#CCCCCC", defaultImage: "placeholder-sleeveless-men2.png", active: true }],
+                    productIdForCart: "mens-gym-vest-1"
+                },
+                "mens-casual-tank-1": {
+                    name: "Men's Casual Tank Top",
+                    brand: "WildTee Essentials",
+                    rating: { score: 3.9, reviews: 6 },
+                    price: { current: 210, original: 320, discount: "34% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Relaxed Fit" },
+                    images: {
+                        main: "placeholder-sleeveless-men3.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-men3.png", mainSrc: "placeholder-sleeveless-men3.png", alt: "Men's Casual Tank Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-men3.png" }
+                    },
+                    description: "Relaxed fit tank top for casual outings.",
+                    fit: "Relaxed Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#DDDDDD", defaultImage: "placeholder-sleeveless-men3.png", active: true }],
+                    productIdForCart: "mens-casual-tank-1"
+                },
+                "mens-graphic-tank-1": {
+                    name: "Men's Graphic Tank",
+                    brand: "WildTee Men's Collection",
+                    rating: { score: 4.2, reviews: 10 },
+                    price: { current: 250, original: 380, discount: "34% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Unique Print!", material: "100% Cotton", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-sleeveless-men4.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-men4.png", mainSrc: "placeholder-sleeveless-men4.png", alt: "Men's Graphic Tank", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-men4.png" }
+                    },
+                    description: "Sleeveless tank with a unique WildTee print.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [
+                        { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 },
+                        { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }
+                    ],
+                    colors: [{ name: "default", hex: "#EEEEEE", defaultImage: "placeholder-sleeveless-men4.png", active: true }],
+                    productIdForCart: "mens-graphic-tank-1"
+                },
+                // Women's Products from shop-women.html
+                "womens-floral-tee-1": {
+                    name: "Women's Floral Print Tee",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.3, reviews: 9 },
+                    price: { current: 280, original: 450, discount: "38% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Spring Collection", material: "100% Cotton", note: "Beautiful floral print" },
+                    images: {
+                        main: "placeholder-tshirt-women1.png",
+                        thumbnails: [{ src: "placeholder-tshirt-women1.png", mainSrc: "placeholder-tshirt-women1.png", alt: "Women's Floral Print Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-women1.png" }
+                    },
+                    description: "A beautiful floral t-shirt, perfect for a spring look.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#FFC0CB", defaultImage: "placeholder-tshirt-women1.png", active: true }],
+                    productIdForCart: "womens-floral-tee-1"
+                },
+                "womens-relaxed-tee-1": {
+                    name: "Women's Relaxed Fit Tee",
+                    brand: "WildTee Comfort",
+                    rating: { score: 4.5, reviews: 12 },
+                    price: { current: 320, original: 500, discount: "36% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Super comfortable" },
+                    images: {
+                        main: "placeholder-tshirt-women3.png",
+                        thumbnails: [{ src: "placeholder-tshirt-women3.png", mainSrc: "placeholder-tshirt-women3.png", alt: "Women's Relaxed Fit Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-women3.png" }
+                    },
+                    description: "Super comfortable relaxed fit t-shirt for everyday wear.",
+                    fit: "Relaxed Fit",
+                    materialDetail: "95% Cotton, 5% Viscose",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#D3D3D3", defaultImage: "placeholder-tshirt-women3.png", active: true }],
+                    productIdForCart: "womens-relaxed-tee-1"
+                },
+                "womens-vneck-1": {
+                    name: "Women's Basic V-Neck",
+                    brand: "WildTee Essentials",
+                    rating: { score: 4.1, reviews: 7 },
+                    price: { current: 250, original: 380, discount: "34% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Wardrobe staple" },
+                    images: {
+                        main: "placeholder-tshirt-women4.png",
+                        thumbnails: [{ src: "placeholder-tshirt-women4.png", mainSrc: "placeholder-tshirt-women4.png", alt: "Women's Basic V-Neck", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-women4.png" }
+                    },
+                    description: "Essential V-neck tee, a wardrobe staple.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#F0F0F0", defaultImage: "placeholder-tshirt-women4.png", active: true }],
+                    productIdForCart: "womens-vneck-1"
+                },
+                "womens-graphic-tee-1": {
+                    name: "Women's Graphic Print Tee",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.4, reviews: 15 },
+                    price: { current: 300, original: 480, discount: "38% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Unique Design", material: "100% Cotton", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-tshirt-women5.png",
+                        thumbnails: [{ src: "placeholder-tshirt-women5.png", mainSrc: "placeholder-tshirt-women5.png", alt: "Women's Graphic Print Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-women5.png" }
+                    },
+                    description: "T-shirt with a unique WildTee graphic design.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#EAEAEA", defaultImage: "placeholder-tshirt-women5.png", active: true }],
+                    productIdForCart: "womens-graphic-tee-1"
+                },
+                "womens-crop-top-1": {
+                    name: "Women's Trendy Crop Top",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.6, reviews: 22 },
+                    price: { current: 270, original: 400, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Stylish Cut", material: "Cotton Blend", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-tshirt-women2.png", // Note: shop-women uses placeholder-tshirt-women2 for this
+                        thumbnails: [{ src: "placeholder-tshirt-women2.png", mainSrc: "placeholder-tshirt-women2.png", alt: "Women's Trendy Crop Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt-women2.png" }
+                    },
+                    description: "A stylish crop top with a unique WildTee design.",
+                    fit: "Slim Fit",
+                    materialDetail: "95% Cotton, 5% Spandex",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#ADD8E6", defaultImage: "placeholder-tshirt-women2.png", active: true }],
+                    productIdForCart: "womens-crop-top-1"
+                },
+                "womens-ribbed-crop-1": {
+                    name: "Women's Ribbed Crop Top",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.2, reviews: 8 },
+                    price: { current: 290, original: 420, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Ribbed Cotton", note: "Comfortable & Chic" },
+                    images: {
+                        main: "placeholder-croptop-women2.png",
+                        thumbnails: [{ src: "placeholder-croptop-women2.png", mainSrc: "placeholder-croptop-women2.png", alt: "Women's Ribbed Crop Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-croptop-women2.png" }
+                    },
+                    description: "Comfortable and chic ribbed crop top.",
+                    fit: "Slim Fit",
+                    materialDetail: "98% Cotton, 2% Elastane",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#FFB6C1", defaultImage: "placeholder-croptop-women2.png", active: true }],
+                    productIdForCart: "womens-ribbed-crop-1"
+                },
+                // womens-offshoulder-crop-1 is already present
+                "womens-graphic-crop-1": {
+                    name: "Women's Graphic Crop Top",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.3, reviews: 11 },
+                    price: { current: 285, original: 410, discount: "30% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Cool Graphic", material: "Cotton Blend", note: "" },
+                    images: {
+                        main: "placeholder-croptop-women4.png",
+                        thumbnails: [{ src: "placeholder-croptop-women4.png", mainSrc: "placeholder-croptop-women4.png", alt: "Women's Graphic Crop Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-croptop-women4.png" }
+                    },
+                    description: "Crop top featuring a cool WildTee graphic.",
+                    fit: "Slim Fit",
+                    materialDetail: "95% Cotton, 5% Spandex",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#90EE90", defaultImage: "placeholder-croptop-women4.png", active: true }],
+                    productIdForCart: "womens-graphic-crop-1"
+                },
+                "womens-hoodie-1": {
+                    name: "Women's Lightweight Hoodie",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.5, reviews: 18 },
+                    price: { current: 480, original: 700, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Stylish & Comfy" },
+                    images: {
+                        main: "placeholder-hoodie-women1.png",
+                        thumbnails: [{ src: "placeholder-hoodie-women1.png", mainSrc: "placeholder-hoodie-women1.png", alt: "Women's Lightweight Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-women1.png" }
+                    },
+                    description: "A stylish and comfy lightweight hoodie.",
+                    fit: "Regular Fit",
+                    materialDetail: "70% Cotton, 30% Polyester",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#DDA0DD", defaultImage: "placeholder-hoodie-women1.png", active: true }],
+                    productIdForCart: "womens-hoodie-1"
+                },
+                "womens-cropped-hoodie-1": {
+                    name: "Women's Cropped Hoodie",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.6, reviews: 20 },
+                    price: { current: 450, original: 650, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Fashionable Design", material: "Cotton Blend", note: "" },
+                    images: {
+                        main: "placeholder-hoodie-women2.png",
+                        thumbnails: [{ src: "placeholder-hoodie-women2.png", mainSrc: "placeholder-hoodie-women2.png", alt: "Women's Cropped Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-women2.png" }
+                    },
+                    description: "Fashionable cropped hoodie design.",
+                    fit: "Cropped Fit",
+                    materialDetail: "70% Cotton, 30% Polyester",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#E6E6FA", defaultImage: "placeholder-hoodie-women2.png", active: true }],
+                    productIdForCart: "womens-cropped-hoodie-1"
+                },
+                "womens-zip-hoodie-1": {
+                    name: "Women's Zip-Up Hoodie",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.4, reviews: 14 },
+                    price: { current: 490, original: 720, discount: "32% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Everyday Wear" },
+                    images: {
+                        main: "placeholder-hoodie-women3.png",
+                        thumbnails: [{ src: "placeholder-hoodie-women3.png", mainSrc: "placeholder-hoodie-women3.png", alt: "Women's Zip-Up Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-women3.png" }
+                    },
+                    description: "Classic zip-up hoodie for everyday wear.",
+                    fit: "Regular Fit",
+                    materialDetail: "70% Cotton, 30% Polyester",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#C0C0C0", defaultImage: "placeholder-hoodie-women3.png", active: true }],
+                    productIdForCart: "womens-zip-hoodie-1"
+                },
+                "womens-oversized-hoodie-1": {
+                    name: "Women's Oversized Hoodie",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.7, reviews: 25 },
+                    price: { current: 500, original: 750, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Trendy & Comfortable", material: "Cotton Blend", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-hoodie-women4.png",
+                        thumbnails: [{ src: "placeholder-hoodie-women4.png", mainSrc: "placeholder-hoodie-women4.png", alt: "Women's Oversized Hoodie", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-hoodie-women4.png" }
+                    },
+                    description: "Trendy and comfortable oversized hoodie.",
+                    fit: "Oversized Fit",
+                    materialDetail: "80% Cotton, 20% Polyester",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#A9A9A9", defaultImage: "placeholder-hoodie-women4.png", active: true }],
+                    productIdForCart: "womens-oversized-hoodie-1"
+                },
+                "womens-fullsleeve-1": {
+                    name: "Women's Full Sleeve Top",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.3, reviews: 10 },
+                    price: { current: 340, original: 500, discount: "32% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Viscose Blend", note: "Elegant & Chic" },
+                    images: {
+                        main: "placeholder-fullsleeve-women1.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-women1.png", mainSrc: "placeholder-fullsleeve-women1.png", alt: "Women's Full Sleeve Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-women1.png" }
+                    },
+                    description: "Elegant full sleeve top for a chic look.",
+                    fit: "Regular Fit",
+                    materialDetail: "95% Viscose, 5% Elastane",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#87CEEB", defaultImage: "placeholder-fullsleeve-women1.png", active: true }],
+                    productIdForCart: "womens-fullsleeve-1"
+                },
+                "womens-printed-fullsleeve-1": {
+                    name: "Women's Printed Full Sleeve",
+                    brand: "WildTee Women's Collection",
+                    rating: { score: 4.2, reviews: 7 },
+                    price: { current: 360, original: 520, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Stylish Print", material: "Cotton Blend", note: "" },
+                    images: {
+                        main: "placeholder-fullsleeve-women2.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-women2.png", mainSrc: "placeholder-fullsleeve-women2.png", alt: "Women's Printed Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-women2.png" }
+                    },
+                    description: "Full sleeve top with a stylish print.",
+                    fit: "Regular Fit",
+                    materialDetail: "95% Cotton, 5% Spandex",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#F5DEB3", defaultImage: "placeholder-fullsleeve-women2.png", active: true }],
+                    productIdForCart: "womens-printed-fullsleeve-1"
+                },
+                "womens-ribbed-fullsleeve-1": {
+                    name: "Women's Ribbed Full Sleeve",
+                    brand: "WildTee Comfort",
+                    rating: { score: 4.4, reviews: 9 },
+                    price: { current: 330, original: 480, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Ribbed Cotton", note: "Comfortable Fit" },
+                    images: {
+                        main: "placeholder-fullsleeve-women3.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-women3.png", mainSrc: "placeholder-fullsleeve-women3.png", alt: "Women's Ribbed Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-women3.png" }
+                    },
+                    description: "Comfortable ribbed full sleeve top.",
+                    fit: "Slim Fit",
+                    materialDetail: "98% Cotton, 2% Elastane",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#B0E0E6", defaultImage: "placeholder-fullsleeve-women3.png", active: true }],
+                    productIdForCart: "womens-ribbed-fullsleeve-1"
+                },
+                "womens-casual-fullsleeve-1": {
+                    name: "Women's Casual Full Sleeve",
+                    brand: "WildTee Essentials",
+                    rating: { score: 4.1, reviews: 6 },
+                    price: { current: 370, original: 530, discount: "30% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Perfect for Outings", material: "Cotton Blend", note: "New Arrival" },
+                    images: {
+                        main: "placeholder-fullsleeve-women4.png",
+                        thumbnails: [{ src: "placeholder-fullsleeve-women4.png", mainSrc: "placeholder-fullsleeve-women4.png", alt: "Women's Casual Full Sleeve", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-fullsleeve-women4.png" }
+                    },
+                    description: "Perfect full sleeve top for casual outings.",
+                    fit: "Regular Fit",
+                    materialDetail: "95% Cotton, 5% Viscose",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#FFE4E1", defaultImage: "placeholder-fullsleeve-women4.png", active: true }],
+                    productIdForCart: "womens-casual-fullsleeve-1"
+                },
+                "womens-sleeveless-1": {
+                    name: "Women's Basic Tank Top",
+                    brand: "WildTee Essentials",
+                    rating: { score: 4.0, reviews: 5 },
+                    price: { current: 200, original: 300, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Versatile & Comfortable" },
+                    images: {
+                        main: "placeholder-sleeveless-women1.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-women1.png", mainSrc: "placeholder-sleeveless-women1.png", alt: "Women's Basic Tank Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-women1.png" }
+                    },
+                    description: "Versatile and comfortable tank top.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#FFF0F5", defaultImage: "placeholder-sleeveless-women1.png", active: true }],
+                    productIdForCart: "womens-sleeveless-1"
+                },
+                "womens-sports-tank-1": {
+                    name: "Women's Sports Tank",
+                    brand: "WildTee Active",
+                    rating: { score: 4.5, reviews: 12 },
+                    price: { current: 240, original: 350, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Polyester Blend", note: "Breathable for Workouts" },
+                    images: {
+                        main: "placeholder-sleeveless-women2.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-women2.png", mainSrc: "placeholder-sleeveless-women2.png", alt: "Women's Sports Tank", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-women2.png" }
+                    },
+                    description: "Breathable tank top for active workouts.",
+                    fit: "Athletic Fit",
+                    materialDetail: "90% Polyester, 10% Spandex",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#E0FFFF", defaultImage: "placeholder-sleeveless-women2.png", active: true }],
+                    productIdForCart: "womens-sports-tank-1"
+                },
+                "womens-lace-tank-1": {
+                    name: "Women's Lace Trim Tank",
+                    brand: "WildTee Fashion",
+                    rating: { score: 4.3, reviews: 8 },
+                    price: { current: 260, original: 390, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Elegant Design", material: "Cotton Blend", note: "Delicate Lace Trim" },
+                    images: {
+                        main: "placeholder-sleeveless-women3.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-women3.png", mainSrc: "placeholder-sleeveless-women3.png", alt: "Women's Lace Trim Tank", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-women3.png" }
+                    },
+                    description: "Elegant tank top with delicate lace trim.",
+                    fit: "Regular Fit",
+                    materialDetail: "95% Cotton, 5% Nylon (Lace)",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#FAF0E6", defaultImage: "placeholder-sleeveless-women3.png", active: true }],
+                    productIdForCart: "womens-lace-tank-1"
+                },
+                "womens-ribbed-tank-1": {
+                    name: "Women's Ribbed Tank Top",
+                    brand: "WildTee Comfort",
+                    rating: { score: 4.2, reviews: 9 },
+                    price: { current: 220, original: 320, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Ribbed Cotton", note: "Stylish & Comfortable" },
+                    images: {
+                        main: "placeholder-sleeveless-women4.png",
+                        thumbnails: [{ src: "placeholder-sleeveless-women4.png", mainSrc: "placeholder-sleeveless-women4.png", alt: "Women's Ribbed Tank Top", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-sleeveless-women4.png" }
+                    },
+                    description: "Stylish and comfortable ribbed tank top.",
+                    fit: "Slim Fit",
+                    materialDetail: "98% Cotton, 2% Elastane",
+                    sizes: [ { name: "XS", active: false, disabled: false, stock: 10 }, { name: "S", active: true, disabled: false, stock: 10 }, { name: "M", active: false, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 5 }],
+                    colors: [{ name: "default", hex: "#F0FFF0", defaultImage: "placeholder-sleeveless-women4.png", active: true }],
+                    productIdForCart: "womens-ribbed-tank-1"
+                }, // <<< Added comma here
+                // Products from shop.html
+                "tiger-strike-tee": {
+                    name: "Tiger Strike Tee",
+                    brand: "WildTee Collection",
+                    rating: { score: 4.5, reviews: 22 },
+                    price: { current: 350, original: 550, discount: "36% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "Best Seller", material: "100% Cotton", note: "Striking tiger design" },
+                    images: {
+                        main: "placeholder-tshirt1.png",
+                        thumbnails: [{ src: "placeholder-tshirt1.png", mainSrc: "placeholder-tshirt1.png", alt: "Tiger Strike Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt1.png" }
+                    },
+                    description: "A bold t-shirt featuring a striking tiger design. Made from 100% cotton.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 }, { name: "XXL", active: false, disabled: false, stock: 3 } ],
+                    colors: [{ name: "default", hex: "#FFA500", defaultImage: "placeholder-tshirt1.png", active: true }],
+                    productIdForCart: "tiger-strike-tee"
+                },
+                "wolf-howl-tee": {
+                    name: "Wolf Howl Tee",
+                    brand: "WildTee Collection",
+                    rating: { score: 4.3, reviews: 18 },
+                    price: { current: 320, original: 500, discount: "36% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Majestic wolf print" },
+                    images: {
+                        main: "placeholder-tshirt2.png",
+                        thumbnails: [{ src: "placeholder-tshirt2.png", mainSrc: "placeholder-tshirt2.png", alt: "Wolf Howl Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt2.png" }
+                    },
+                    description: "Comfortable and stylish t-shirt with a majestic wolf print.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 } ],
+                    colors: [{ name: "default", hex: "#A9A9A9", defaultImage: "placeholder-tshirt2.png", active: true }],
+                    productIdForCart: "wolf-howl-tee"
+                },
+                "eagle-flight-tee": {
+                    name: "Eagle Flight Tee",
+                    brand: "WildTee Collection",
+                    rating: { score: 4.6, reviews: 25 },
+                    price: { current: 380, original: 600, discount: "37% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "New Arrival", material: "100% Cotton", note: "Stunning eagle graphic" },
+                    images: {
+                        main: "placeholder-tshirt3.png",
+                        thumbnails: [{ src: "placeholder-tshirt3.png", mainSrc: "placeholder-tshirt3.png", alt: "Eagle Flight Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt3.png" }
+                    },
+                    description: "Feel the freedom with this stunning eagle graphic t-shirt.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 } ],
+                    colors: [{ name: "default", hex: "#87CEEB", defaultImage: "placeholder-tshirt3.png", active: true }],
+                    productIdForCart: "eagle-flight-tee"
+                },
+                "forest-spirit-tee": {
+                    name: "Forest Spirit Tee",
+                    brand: "WildTee Collection",
+                    rating: { score: 4.2, reviews: 15 },
+                    price: { current: 340, original: 520, discount: "35% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "100% Cotton", note: "Serene forest theme" },
+                    images: {
+                        main: "placeholder-tshirt4.png",
+                        thumbnails: [{ src: "placeholder-tshirt4.png", mainSrc: "placeholder-tshirt4.png", alt: "Forest Spirit Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt4.png" }
+                    },
+                    description: "Connect with nature with this serene forest-themed t-shirt.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 } ],
+                    colors: [{ name: "default", hex: "#228B22", defaultImage: "placeholder-tshirt4.png", active: true }],
+                    productIdForCart: "forest-spirit-tee"
+                },
+                "abstract-lines-tee": {
+                    name: "Abstract Lines Tee",
+                    brand: "WildTee Modern",
+                    rating: { score: 4.0, reviews: 10 },
+                    price: { current: 280, original: 400, discount: "30% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Cotton Blend", note: "Minimalist Design" },
+                    images: {
+                        main: "placeholder-tshirt5.png",
+                        thumbnails: [{ src: "placeholder-tshirt5.png", mainSrc: "placeholder-tshirt5.png", alt: "Abstract Lines Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt5.png" }
+                    },
+                    description: "Modern and minimalist abstract design for a subtle statement.",
+                    fit: "Slim Fit",
+                    materialDetail: "95% Cotton, 5% Polyester",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }],
+                    colors: [{ name: "default", hex: "#DCDCDC", defaultImage: "placeholder-tshirt5.png", active: true }],
+                    productIdForCart: "abstract-lines-tee"
+                },
+                "vintage-roar-tee": {
+                    name: "Vintage Roar Tee",
+                    brand: "WildTee Classics",
+                    rating: { score: 4.4, reviews: 19 },
+                    price: { current: 360, original: 550, discount: "35% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "New Arrival", material: "100% Cotton", note: "Powerful roar graphic" },
+                    images: {
+                        main: "placeholder-tshirt6.png",
+                        thumbnails: [{ src: "placeholder-tshirt6.png", mainSrc: "placeholder-tshirt6.png", alt: "Vintage Roar Tee", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-tshirt6.png" }
+                    },
+                    description: "A classic vintage design with a powerful roar graphic.",
+                    fit: "Regular Fit",
+                    materialDetail: "100% Cotton",
+                    sizes: [ { name: "S", active: false, disabled: false, stock: 10 }, { name: "M", active: true, disabled: false, stock: 10 }, { name: "L", active: false, disabled: false, stock: 10 }, { name: "XL", active: false, disabled: false, stock: 5 } ],
+                    colors: [{ name: "default", hex: "#F5F5DC", defaultImage: "placeholder-tshirt6.png", active: true }],
+                    productIdForCart: "vintage-roar-tee"
+                },
+                "wildtee-ring": {
+                    name: "WildTee Ring",
+                    brand: "WildTee Accessories",
+                    rating: { score: 4.0, reviews: 5 },
+                    price: { current: 200, original: 300, discount: "33% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "New Accessory", material: "Stainless Steel", note: "Stylish & Durable" },
+                    images: {
+                        main: "placeholder-ring.png",
+                        thumbnails: [{ src: "placeholder-ring.png", mainSrc: "placeholder-ring.png", alt: "WildTee Ring", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-ring.png" }
+                    },
+                    description: "Stylish accessory to complement your wild look.",
+                    fit: "Accessory",
+                    materialDetail: "Stainless Steel",
+                    sizes: [ { name: "7", active: false, disabled: false, stock: 10 }, { name: "8", active: true, disabled: false, stock: 10 }, { name: "9", active: false, disabled: false, stock: 10 } ],
+                    colors: [{ name: "silver", hex: "#C0C0C0", defaultImage: "placeholder-ring.png", active: true }],
+                    productIdForCart: "wildtee-ring"
+                },
+                "adventure-watch": {
+                    name: "Adventure Watch",
+                    brand: "WildTee Accessories",
+                    rating: { score: 4.5, reviews: 12 },
+                    price: { current: 450, original: 650, discount: "31% OFF", taxInfo: "inclusive of all taxes" },
+                    meta: { offer: "", material: "Stainless Steel & Nylon Strap", note: "Durable for adventures" },
+                    images: {
+                        main: "placeholder-watch.png",
+                        thumbnails: [{ src: "placeholder-watch.png", mainSrc: "placeholder-watch.png", alt: "Adventure Watch", color: "default" }],
+                        colorSpecificImages: { "default": "placeholder-watch.png" }
+                    },
+                    description: "Durable watch for all your adventures.",
+                    fit: "Accessory",
+                    materialDetail: "Stainless Steel Case, Nylon Strap",
+                    sizes: [ { name: "One Size", active: true, disabled: false, stock: 15 } ],
+                    colors: [{ name: "black", hex: "#333333", defaultImage: "placeholder-watch.png", active: true }],
+                    productIdForCart: "adventure-watch"
+                }
+            };
+
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('productId');
+            const product = productCatalog[productId];
+
+            if (product) {
+                // Update general info
+                document.getElementById('productName').textContent = product.name;
+                document.title = product.name + " - WildTee";
+                document.getElementById('brandName').textContent = product.brand;
+                document.getElementById('currentPrice').textContent = `₹${product.price.current}`;
+                document.getElementById('originalPrice').textContent = `₹${product.price.original}`;
+                document.getElementById('discountPercentage').textContent = product.price.discount;
+                document.getElementById('taxInfo').textContent = product.price.taxInfo;
+                document.getElementById('offerTag').textContent = product.meta.offer;
+                document.getElementById('materialInfo').textContent = product.meta.material;
+                document.getElementById('specialNote').textContent = product.meta.note;
+                document.getElementById('productDescriptionText').textContent = product.description;
+                document.getElementById('productFit').innerHTML = `<strong>Fit:</strong> ${product.fit}`;
+                document.getElementById('productMaterialDetail').innerHTML = `<strong>Material:</strong> ${product.materialDetail}`;
+                document.getElementById('addToCartButton').setAttribute('onclick', `addToCart('${product.productIdForCart}')`);
+
+
+                // Update Rating
+                const ratingStarsContainer = document.getElementById('productRatingStars');
+                ratingStarsContainer.innerHTML = ''; // Clear existing
+                let fullStars = Math.floor(product.rating.score);
+                let halfStar = product.rating.score % 1 >= 0.5;
+                for (let i = 0; i < fullStars; i++) ratingStarsContainer.innerHTML += '<i class="fas fa-star"></i>';
+                if (halfStar) ratingStarsContainer.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+                for (let i = 0; i < (5 - Math.ceil(product.rating.score)); i++) ratingStarsContainer.innerHTML += '<i class="far fa-star"></i>'; // Empty stars
+                document.getElementById('productRatingText').textContent = `${product.rating.score} | `;
+                document.getElementById('productReviewsLink').textContent = `${product.rating.reviews} Reviews`;
+
+
+                // Update Main Image
+                document.getElementById('mainImage').src = product.images.main;
+                document.getElementById('mainImage').alt = product.name;
+
+                // Update Thumbnails
+                const thumbnailsContainer = document.getElementById('productThumbnailsContainer');
+                thumbnailsContainer.innerHTML = ''; // Clear existing
+                product.images.thumbnails.forEach(thumb => {
+                    const img = document.createElement('img');
+                    img.src = thumb.src;
+                    img.alt = thumb.alt;
+                    img.onclick = () => changeMainImage(thumb.mainSrc, img);
+                    thumbnailsContainer.appendChild(img);
+                });
+                 // Activate first thumbnail by default if any
+                if (thumbnailsContainer.firstChild) {
+                    changeMainImage(product.images.thumbnails[0].mainSrc, thumbnailsContainer.firstChild);
+                }
+
+
+                // Update Sizes
+                const sizeOptionsContainer = document.getElementById('sizeOptionsContainer');
+                sizeOptionsContainer.innerHTML = ''; // Clear existing
+                let totalStock = 0;
+                product.sizes.forEach(size => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = size.name;
+                    button.setAttribute('data-size', size.name);
+                    if (size.active) button.classList.add('active');
+                    if (size.disabled) {
+                        button.disabled = true;
+                        button.style.textDecoration = 'line-through';
+                        button.style.color = '#aaa';
+                    }
+                    button.addEventListener('click', function() {
+                        if (this.disabled) return;
+                        sizeOptionsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        // Update stock message if needed
+                        const selectedSizeData = product.sizes.find(s => s.name === this.getAttribute('data-size'));
+                        document.getElementById('stockLeftMessage').textContent = selectedSizeData && selectedSizeData.stock !== undefined ? `${selectedSizeData.stock} left` : '';
+                    });
+                    sizeOptionsContainer.appendChild(button);
+                    if(size.active && size.stock !== undefined) totalStock = size.stock; // Show stock for initially active size
+                });
+                document.getElementById('stockLeftMessage').textContent = totalStock > 0 ? `${totalStock} left` : (product.sizes.some(s=>s.stock > 0) ? '' : 'Out of stock');
+
+
+                // Update Colors
+                const colorOptionsContainer = document.getElementById('colorOptionsContainer');
+                colorOptionsContainer.innerHTML = ''; // Clear existing
+                product.colors.forEach(color => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.classList.add('color-swatch');
+                    button.style.backgroundColor = color.hex;
+                    button.title = color.name.charAt(0).toUpperCase() + color.name.slice(1);
+                    button.setAttribute('data-color', color.name);
+                    button.setAttribute('data-image', product.images.colorSpecificImages[color.name] || product.images.main);
+                    if (color.active) button.classList.add('active');
+
+                    button.addEventListener('click', function() {
+                        colorOptionsContainer.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                        this.classList.add('active');
+                        const newImage = this.getAttribute('data-image');
+                        changeMainImage(newImage, this); // Pass swatch element to mark active
+                    });
+                    colorOptionsContainer.appendChild(button);
+                });
+                 // Ensure main image reflects the active color swatch on load
+                const activeColorSwatch = colorOptionsContainer.querySelector('.color-swatch.active');
+                if (activeColorSwatch) {
+                    document.getElementById('mainImage').src = activeColorSwatch.getAttribute('data-image');
+                }
+
+
+            } else {
+                document.getElementById('productName').textContent = "Product Not Found";
+                document.querySelector('.product-detail-container').innerHTML = '<p style="text-align:center; font-size:1.2em;">Sorry, the product you are looking for could not be found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

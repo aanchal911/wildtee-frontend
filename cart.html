@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to cart page */
+        .cart-page-header {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-page-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+
+        .cart-container {
+            width: 90%;
+            max-width: 900px; /* Slightly wider for cart table */
+            margin: 0 auto 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-details h3 {
+            font-size: 1.2em;
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .cart-item-details .price, .cart-item-details .quantity {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .cart-item-details .quantity input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+
+        .cart-item-actions .btn-remove {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .cart-item-actions .btn-remove:hover {
+            background-color: #e60000;
+        }
+        .cart-item-price-total {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            min-width: 80px; /* Align prices */
+            text-align: right;
+        }
+
+        .cart-summary {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e91e63;
+            text-align: right;
+        }
+        .cart-summary h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .cart-summary p {
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+        .cart-summary .total-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        .cart-summary .btn-checkout {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .empty-cart-message h2 {
+            font-size: 1.8em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .empty-cart-message p {
+            font-size: 1.1em;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="cart-page-header">
+            <div class="container">
+                <h1>Your Shopping Cart</h1>
+            </div>
+        </section>
+
+        <div class="cart-container" id="cartItemsContainer">
+            <!-- Cart items will be dynamically inserted here by JS in a real app -->
+            <!-- Static example for now: -->
+            <div class="cart-item" data-product-id="tiger-strike-tee">
+                <div class="cart-item-image">
+                    <img src="placeholder-tshirt1.png" alt="Tiger Strike Tee">
+                </div>
+                <div class="cart-item-details">
+                    <h3>Tiger Strike Tee</h3>
+                    <p class="price">Price: ₹25.00</p>
+                    <p class="quantity">Quantity: <input type="number" value="1" min="1" onchange="updateCartItemQuantity('tiger-strike-tee', this.value)"></p>
+                </div>
+                <div class="cart-item-price-total">₹25.00</div>
+                <div class="cart-item-actions">
+                    <button class="btn-remove" onclick="removeItem('tiger-strike-tee')"><i class="fas fa-trash-alt"></i> Remove</button>
+                </div>
+            </div>
+
+            <div class="cart-item" data-product-id="wolf-howl-tee">
+                <div class="cart-item-image">
+                    <img src="placeholder-tshirt2.png" alt="Wolf Howl Tee">
+                </div>
+                <div class="cart-item-details">
+                    <h3>Wolf Howl Tee</h3>
+                    <p class="price">Price: ₹22.00</p>
+                    <p class="quantity">Quantity: <input type="number" value="2" min="1" onchange="updateCartItemQuantity('wolf-howl-tee', this.value)"></p>
+                </div>
+                <div class="cart-item-price-total">₹44.00</div>
+                <div class="cart-item-actions">
+                    <button class="btn-remove" onclick="removeItem('wolf-howl-tee')"><i class="fas fa-trash-alt"></i> Remove</button>
+                </div>
+            </div>
+            
+            <!-- Empty Cart Message (to be shown if cart is empty) -->
+            <!-- 
+            <div class="empty-cart-message" style="display: none;">
+                <h2>Your Cart is Empty</h2>
+                <p>Looks like you haven't added anything to your cart yet.</p>
+                <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+            </div>
+            -->
+
+            <div class="cart-summary">
+                <p>Subtotal: <span id="cartSubtotal">₹69.00</span></p>
+                <p>Shipping: <span id="cartShipping">FREE</span></p>
+                <h2>Total: <span class="total-price" id="cartTotal">₹69.00</span></h2>
+                <button class="btn btn-primary btn-checkout" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterCart" name="ageConsentFooter">
+                        <label for="ageConsentFooterCart">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Basic cart update logic for demo (would be more complex in a real app)
+        function updateCartItemQuantity(productId, quantity) {
+            console.log(`Updating ${productId} quantity to ${quantity}`);
+            // Recalculate totals - this is a simplified example
+            // In a real app, you'd fetch price, update item total, then cart total
+            recalculateCartTotals();
+        }
+
+        function recalculateCartTotals() {
+            let subtotal = 0;
+            const cartItems = document.querySelectorAll('.cart-item');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartSummary = cartItemsContainer.querySelector('.cart-summary');
+            
+            if (cartItems.length === 0) {
+                // Ensure the empty message is created if it doesn't exist or is not visible
+                let emptyMessage = cartItemsContainer.querySelector('.empty-cart-message');
+                if (!emptyMessage) {
+                    emptyMessage = document.createElement('div');
+                    emptyMessage.className = 'empty-cart-message';
+                    emptyMessage.innerHTML = `
+                        <h2>Your Cart is Empty</h2>
+                        <p>Looks like you haven't added anything to your cart yet.</p>
+                        <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                    `;
+                    // Insert before summary, or at the start if summary also removed/hidden
+                    if(cartSummary) {
+                        cartItemsContainer.insertBefore(emptyMessage, cartSummary);
+                    } else {
+                        cartItemsContainer.appendChild(emptyMessage);
+                    }
+                }
+                emptyMessage.style.display = 'block';
+                if(cartSummary) cartSummary.style.display = 'none'; // Hide summary if cart is empty
+                return;
+            } else {
+                 const emptyMessage = cartItemsContainer.querySelector('.empty-cart-message');
+                 if(emptyMessage) emptyMessage.style.display = 'none';
+                 if(cartSummary) cartSummary.style.display = 'block';
+            }
+
+            cartItems.forEach(item => {
+                const priceText = item.querySelector('.price').textContent.replace('Price: ₹', '');
+                const quantityInput = item.querySelector('input[type="number"]');
+                const quantity = parseInt(quantityInput.value);
+                const price = parseFloat(priceText);
+
+                if (isNaN(quantity) || quantity < 1) {
+                    quantityInput.value = 1; // Reset to 1 if invalid
+                    // Potentially alert user or handle more gracefully
+                }
+                
+                const itemTotal = price * quantity;
+                item.querySelector('.cart-item-price-total').textContent = `₹${itemTotal.toFixed(2)}`;
+                subtotal += itemTotal;
+            });
+
+            if(cartSummary){
+                cartSummary.querySelector('#cartSubtotal').textContent = `₹${subtotal.toFixed(2)}`;
+                // Assuming shipping is free for now
+                cartSummary.querySelector('#cartTotal').textContent = `₹${subtotal.toFixed(2)}`;
+            }
+        }
+        
+        // Override the script.js removeItem to also update UI
+        const originalRemoveItem = window.removeItem; // Store original if it exists
+        window.removeItem = function(productId) {
+            if (originalRemoveItem) {
+                originalRemoveItem(productId); // Call original if needed, or just our logic
+            } else {
+                 console.log(`Removing product ${productId} from cart.`);
+                 alert(`Item ${productId} removed from cart! (This is a demo)`);
+            }
+            const itemElement = document.querySelector(`.cart-item[data-product-id="${productId}"]`);
+            if (itemElement) {
+                itemElement.remove();
+                recalculateCartTotals(); // Recalculate after removing
+            }
+        }
+
+        // Initial calculation on page load
+        document.addEventListener('DOMContentLoaded', recalculateCartTotals);
+    </script>
+</body>
+</html>

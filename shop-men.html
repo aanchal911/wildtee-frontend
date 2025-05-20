@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Men - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to shop page if needed */
+        .shop-header {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .shop-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+        .shop-header p {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+           <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html" class="active">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="shop-header">
+            <div class="container">
+                <h1>Men's T-Shirt Collection</h1>
+                <p>Discover our exclusive range of t-shirts for men.</p>
+            </div>
+        </section>
+
+        <div class="container shop-page-layout">
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <div class="subcategory-filters">
+                        <button class="btn btn-outline filter-btn active" data-filter="all">All</button>
+                        <button class="btn btn-outline filter-btn" data-filter="full-sleeve">Full Sleeve</button>
+                        <button class="btn btn-outline filter-btn" data-filter="normal-tshirt">Normal T-shirt</button>
+                        <button class="btn btn-outline filter-btn" data-filter="hoodie">Hoodie</button>
+                        <button class="btn btn-outline filter-btn" data-filter="sleeveless">Sleeveless</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Price</h4>
+                    <div class="price-filter">
+                        <label for="priceRangeMen">Range: ₹200 - ₹</label><span id="priceValueMen">500</span>
+                        <input type="range" id="priceRangeMen" name="priceRangeMen" min="200" max="500" value="500" class="price-slider">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Gender</h4>
+                    <div><input type="checkbox" id="genderMen" name="gender" value="men" checked disabled> <label for="genderMen">Men</label></div>
+                    <div><input type="checkbox" id="genderUnisexMen" name="gender" value="unisex"> <label for="genderUnisexMen">Unisex</label></div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Sizes</h4>
+                    <div><input type="checkbox" id="sizeSM" name="size" value="s"> <label for="sizeSM">S</label></div>
+                    <div><input type="checkbox" id="sizeMM" name="size" value="m"> <label for="sizeMM">M</label></div>
+                    <div><input type="checkbox" id="sizeLM" name="size" value="l"> <label for="sizeLM">L</label></div>
+                    <div><input type="checkbox" id="sizeXLM" name="size" value="xl"> <label for="sizeXLM">XL</label></div>
+                    <div><input type="checkbox" id="sizeXXLM" name="size" value="xxl"> <label for="sizeXXLM">XXL</label></div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Brand</h4>
+                    <div><input type="checkbox" id="brandWildTeeM" name="brand" value="wildtee" checked> <label for="brandWildTeeM">WildTee</label></div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Design</h4>
+                    <div><input type="checkbox" id="designGraphicM" name="design" value="graphic"> <label for="designGraphicM">Graphic Print</label></div>
+                    <div><input type="checkbox" id="designSolidM" name="design" value="solid"> <label for="designSolidM">Solid</label></div>
+                    <div><input type="checkbox" id="designTypographyM" name="design" value="typography"> <label for="designTypographyM">Typography</label></div>
+                </div>
+            </aside>
+
+            <main class="product-listing-area">
+                 <div class="sorting-options">
+                     <select name="sort-by">
+                        <option value="default">Default Sorting</option>
+                        <option value="price-low-high">Price: Low to High</option>
+                        <option value="price-high-low">Price: High to Low</option>
+                        <option value="newest">Newest Arrivals</option>
+                    </select>
+                </div>
+                <section class="product-section">
+                <h2>Men's Products</h2>
+                <div class="product-grid">
+                    <!-- Placeholder for Men's Products -->
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="s,m,l" data-designs="graphic">
+                        <img src="graphic tee men.webp" alt="Men's Graphic Tee">
+                        <h3>Men's Classic Graphic Tee</h3>
+                        <p class="product-description">A comfortable and stylish graphic t-shirt for men.</p>
+                        <p class="price">Price: ₹299</p>
+                        <a href="product-detail.html?productId=mens-graphic-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-graphic-tee-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="s,m" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="men v neck.jpg" alt="Men's V-Neck Tee">
+                        <h3>Men's V-Neck Tee</h3>
+                        <p class="product-description">A modern V-neck t-shirt, perfect for a casual look.</p>
+                        <p class="price">Price: ₹249</p>
+                        <a href="product-detail.html?productId=mens-vneck-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-vneck-tee-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="m,l,xl" data-designs="typography">
+                        <img src="performance men.jpg" alt="Men's Performance Tee">
+                        <h3>Men's Performance Tee</h3>
+                        <p class="product-description">Lightweight and breathable, ideal for workouts.</p>
+                        <p class="price">Price: ₹349</p>
+                        <a href="product-detail.html?productId=mens-performance-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-performance-tee-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="s,xl,xxl" data-designs="solid">
+                        <img src="crew man.webp" alt="Men's Basic Crew Tee">
+                        <h3>Men's Basic Crew Tee</h3>
+                        <p class="product-description">Essential crew neck t-shirt for everyday comfort.</p>
+                        <p class="price">Price: ₹220</p>
+                        <a href="product-detail.html?productId=mens-basic-crew-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-basic-crew-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="hoodie" data-sizes="m,l,xl" data-designs="graphic">
+                        <img src="hoodie  man.jpg" alt="Men's Classic Hoodie">
+                        <h3>Men's Classic Hoodie</h3>
+                        <p class="product-description">Warm and comfortable classic hoodie.</p>
+                        <p class="price">Price: ₹499</p>
+                        <a href="product-detail.html?productId=mens-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="s,m" data-designs="solid">
+                        <img src="zip up hoodie man.avif" alt="Men's Zip-Up Hoodie">
+                        <h3>Men's Zip-Up Hoodie</h3>
+                        <p class="product-description">Versatile zip-up hoodie for all seasons.</p>
+                        <p class="price">Price: ₹450</p>
+                        <a href="product-detail.html?productId=mens-zip-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-zip-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="l,xl,xxl" data-designs="typography">
+                        <img src="pullover hoodie man.webp" alt="Men's Pullover Hoodie">
+                        <h3>Men's Pullover Hoodie</h3>
+                        <p class="product-description">Soft pullover hoodie with front pocket.</p>
+                        <p class="price">Price: ₹475</p>
+                        <a href="product-detail.html?productId=mens-pullover-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-pullover-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="s,m,l" data-designs="graphic">
+                        <span class="badge new">New</span>
+                        <img src="graphic print hoodie man.webp" alt="Men's Graphic Hoodie">
+                        <h3>Men's Graphic Print Hoodie</h3>
+                        <p class="product-description">Hoodie with a bold WildTee graphic.</p>
+                        <p class="price">Price: ₹500</p>
+                        <a href="product-detail.html?productId=mens-graphic-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-graphic-hoodie-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="full-sleeve" data-sizes="s,m,l" data-designs="solid">
+                        <img src="full sleev man.jpg" alt="Men's Full Sleeve Tee">
+                        <h3>Men's Full Sleeve Tee</h3>
+                        <p class="product-description">Stylish full sleeve t-shirt for a layered look.</p>
+                        <p class="price">Price: ₹320</p>
+                        <a href="product-detail.html?productId=mens-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="m,xl" data-designs="typography">
+                        <img src="henely man.webp" alt="Men's Henley Full Sleeve">
+                        <h3>Men's Henley Full Sleeve</h3>
+                        <p class="product-description">Classic Henley neck full sleeve t-shirt.</p>
+                        <p class="price">Price: ₹350</p>
+                        <a href="product-detail.html?productId=mens-henley-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-henley-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="s,xxl" data-designs="graphic">
+                        <img src="sripped full sleeve man.webp" alt="Men's Striped Full Sleeve">
+                        <h3>Men's Striped Full Sleeve</h3>
+                        <p class="product-description">Trendy striped full sleeve t-shirt.</p>
+                        <p class="price">Price: ₹330</p>
+                        <a href="product-detail.html?productId=mens-striped-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-striped-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="m,l,xl" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="graphic full sleeve man.jpg" alt="Men's Graphic Full Sleeve">
+                        <h3>Men's Graphic Full Sleeve</h3>
+                        <p class="product-description">Full sleeve tee with a cool WildTee graphic.</p>
+                        <p class="price">Price: ₹375</p>
+                        <a href="product-detail.html?productId=mens-graphic-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-graphic-fullsleeve-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="sleeveless" data-sizes="s,m" data-designs="graphic">
+                        <img src="teaining tank man.avif" alt="Men's Training Tank">
+                        <h3>Men's Training Tank</h3>
+                        <p class="product-description">Breathable sleeveless tank for workouts.</p>
+                        <p class="price">Price: ₹200</p>
+                        <a href="product-detail.html?productId=mens-sleeveless-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-sleeveless-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="l,xl" data-designs="solid">
+                        <img src="gym vest man.webp" alt="Men's Gym Vest">
+                        <h3>Men's Gym Vest</h3>
+                        <p class="product-description">Comfortable vest for gym and active wear.</p>
+                        <p class="price">Price: ₹230</p>
+                        <a href="product-detail.html?productId=mens-gym-vest-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-gym-vest-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="s,xxl" data-designs="typography">
+                        <img src="casual tank man.jpg" alt="Men's Casual Tank">
+                        <h3>Men's Casual Tank Top</h3>
+                        <p class="product-description">Relaxed fit tank top for casual outings.</p>
+                        <p class="price">Price: ₹210</p>
+                        <a href="product-detail.html?productId=mens-casual-tank-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-casual-tank-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="m,l,xl" data-designs="graphic">
+                        <span class="badge new">New</span>
+                        <img src="graphic tank man.webp" alt="Men's Graphic Tank">
+                        <h3>Men's Graphic Tank</h3>
+                        <p class="product-description">Sleeveless tank with a unique WildTee print.</p>
+                        <p class="price">Price: ₹250</p>
+                        <a href="product-detail.html?productId=mens-graphic-tank-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('mens-graphic-tank-1')">Add to Cart</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterShopMen" name="ageConsentFooter">
+                        <label for="ageConsentFooterShopMen">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

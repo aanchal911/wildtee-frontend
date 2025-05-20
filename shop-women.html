@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Women - WildTee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to shop page if needed */
+        .shop-header {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .shop-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0;
+        }
+        .shop-header p {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php"><div class="logo-text">WildTee</div></a>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-wrapper">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="shop.html" class="active">SHOP</a></li>
+                        <li><a href="why-us.html">WHY US</a></li>
+                        <li><a href="contact-us.html">CONTACT US</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="shop-header">
+            <div class="container">
+                <h1>Women's T-Shirt Collection</h1>
+                <p>Explore our stylish and comfortable t-shirts for women.</p>
+            </div>
+        </section>
+
+        <div class="container shop-page-layout">
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <div class="subcategory-filters">
+                        <button class="btn btn-outline filter-btn active" data-filter="all">All</button>
+                        <button class="btn btn-outline filter-btn" data-filter="full-sleeve">Full Sleeve</button>
+                        <button class="btn btn-outline filter-btn" data-filter="normal-tshirt">Normal T-shirt</button>
+                        <button class="btn btn-outline filter-btn" data-filter="hoodie">Hoodie</button>
+                        <button class="btn btn-outline filter-btn" data-filter="crop-tshirt">Crop T-shirt</button>
+                        <button class="btn btn-outline filter-btn" data-filter="sleeveless">Sleeveless</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Price</h4>
+                    <div class="price-filter">
+                        <label for="priceRangeWomen">Range: ₹200 - ₹</label><span id="priceValueWomen">500</span>
+                        <input type="range" id="priceRangeWomen" name="priceRangeWomen" min="200" max="500" value="500" class="price-slider">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Gender</h4>
+                    <div><input type="checkbox" id="genderWomen" name="gender" value="women" checked disabled> <label for="genderWomen">Women</label></div>
+                    <div><input type="checkbox" id="genderUnisexWomen" name="gender" value="unisex"> <label for="genderUnisexWomen">Unisex</label></div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Sizes</h4>
+                    <div><input type="checkbox" id="sizeXSW" name="size" value="xs"> <label for="sizeXSW">XS</label></div>
+                    <div><input type="checkbox" id="sizeSW" name="size" value="s"> <label for="sizeSW">S</label></div>
+                    <div><input type="checkbox" id="sizeMW" name="size" value="m"> <label for="sizeMW">M</label></div>
+                    <div><input type="checkbox" id="sizeLW" name="size" value="l"> <label for="sizeLW">L</label></div>
+                    <div><input type="checkbox" id="sizeXLW" name="size" value="xl"> <label for="sizeXLW">XL</label></div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Brand</h4>
+                    <div><input type="checkbox" id="brandWildTeeW" name="brand" value="wildtee" checked> <label for="brandWildTeeW">WildTee</label></div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Design</h4>
+                    <div><input type="checkbox" id="designGraphicW" name="design" value="graphic"> <label for="designGraphicW">Graphic Print</label></div>
+                    <div><input type="checkbox" id="designSolidW" name="design" value="solid"> <label for="designSolidW">Solid</label></div>
+                    <div><input type="checkbox" id="designFloralW" name="design" value="floral"> <label for="designFloralW">Floral</label></div>
+                </div>
+            </aside>
+
+            <main class="product-listing-area">
+                <div class="sorting-options">
+                     <select name="sort-by">
+                        <option value="default">Default Sorting</option>
+                        <option value="price-low-high">Price: Low to High</option>
+                        <option value="price-high-low">Price: High to Low</option>
+                        <option value="newest">Newest Arrivals</option>
+                    </select>
+                </div>
+                <section class="product-section">
+                    <h2>Women's Products</h2>
+                    <div class="product-grid">
+                    <!-- Placeholder for Women's Products -->
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="xs,s,m" data-designs="floral">
+                        <img src="floral woman.jpg" alt="Women's Floral Tee">
+                        <h3>Women's Floral Print Tee</h3>
+                        <p class="product-description">A beautiful floral t-shirt, perfect for a spring look.</p>
+                        <p class="price">Price: ₹280</p>
+                        <a href="product-detail.html?productId=womens-floral-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-floral-tee-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="s,m,l" data-designs="solid">
+                        <img src="relaxed woman.jpg" alt="Women's Relaxed Fit Tee">
+                        <h3>Women's Relaxed Fit Tee</h3>
+                        <p class="product-description">Super comfortable relaxed fit t-shirt for everyday wear.</p>
+                        <p class="price">Price: ₹320</p>
+                        <a href="product-detail.html?productId=womens-relaxed-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-relaxed-tee-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="xs,m" data-designs="solid">
+                        <img src="v neck woman.jpg" alt="Women's Basic V-Neck">
+                        <h3>Women's Basic V-Neck</h3>
+                        <p class="product-description">Essential V-neck tee, a wardrobe staple.</p>
+                        <p class="price">Price: ₹250</p>
+                        <a href="product-detail.html?productId=womens-vneck-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-vneck-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="normal-tshirt" data-sizes="s,l,xl" data-designs="graphic">
+                        <span class="badge new">New</span>
+                        <img src="graphic tee woman.avif" alt="Women's Graphic Print Tee">
+                        <h3>Women's Graphic Print Tee</h3>
+                        <p class="product-description">T-shirt with a unique WildTee graphic design.</p>
+                        <p class="price">Price: ₹300</p>
+                        <a href="product-detail.html?productId=womens-graphic-tee-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-graphic-tee-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="crop-tshirt" data-sizes="xs,s" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="trendy crop woman.webp" alt="Women's Trendy Crop Top">
+                        <h3>Women's Trendy Crop Top</h3>
+                        <p class="product-description">A stylish crop top with a unique WildTee design.</p>
+                        <p class="price">Price: ₹270</p>
+                        <a href="product-detail.html?productId=womens-crop-top-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-crop-top-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="crop-tshirt" data-sizes="m,l" data-designs="solid">
+                        <img src="ribbed crop woman.webp" alt="Women's Ribbed Crop Top">
+                        <h3>Women's Ribbed Crop Top</h3>
+                        <p class="product-description">Comfortable and chic ribbed crop top.</p>
+                        <p class="price">Price: ₹290</p>
+                        <a href="product-detail.html?productId=womens-ribbed-crop-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-ribbed-crop-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="crop-tshirt" data-sizes="xs,xl" data-designs="solid">
+                        <img src="off sholder crop woman.webp" alt="Women's Off-Shoulder Crop">
+                        <h3>Women's Off-Shoulder Crop</h3>
+                        <p class="product-description">Trendy off-shoulder crop top design.</p>
+                        <p class="price">Price: ₹310</p>
+                        <a href="product-detail.html?productId=womens-offshoulder-crop-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-offshoulder-crop-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="crop-tshirt" data-sizes="s,m,l" data-designs="graphic">
+                        <img src="placeholder-croptop-women4.png" alt="Women's Graphic Crop Top">
+                        <h3>Women's Graphic Crop Top</h3>
+                        <p class="product-description">Crop top featuring a cool WildTee graphic.</p>
+                        <p class="price">Price: ₹285</p>
+                        <a href="product-detail.html?productId=womens-graphic-crop-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-graphic-crop-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="hoodie" data-sizes="xs,s,m" data-designs="solid">
+                        <img src="lighweight woman.webp" alt="Women's Lightweight Hoodie">
+                        <h3>Women's Lightweight Hoodie</h3>
+                        <p class="product-description">A stylish and comfy lightweight hoodie.</p>
+                        <p class="price">Price: ₹480</p>
+                        <a href="product-detail.html?productId=womens-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="s,m,l" data-designs="solid">
+                        <img src="crop hoodie woman.jpg" alt="Women's Cropped Hoodie">
+                        <h3>Women's Cropped Hoodie</h3>
+                        <p class="product-description">Fashionable cropped hoodie design.</p>
+                        <p class="price">Price: ₹450</p>
+                        <a href="product-detail.html?productId=womens-cropped-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-cropped-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="xs,xl" data-designs="solid">
+                        <img src="zipup hoodie woman.jpg" alt="Women's Zip-Up Hoodie">
+                        <h3>Women's Zip-Up Hoodie</h3>
+                        <p class="product-description">Classic zip-up hoodie for everyday wear.</p>
+                        <p class="price">Price: ₹490</p>
+                        <a href="product-detail.html?productId=womens-zip-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-zip-hoodie-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="hoodie" data-sizes="s,m,l" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="oversize hoodie woman.webp" alt="Women's Oversized Hoodie">
+                        <h3>Women's Oversized Hoodie</h3>
+                        <p class="product-description">Trendy and comfortable oversized hoodie.</p>
+                        <p class="price">Price: ₹500</p>
+                        <a href="product-detail.html?productId=womens-oversized-hoodie-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-oversized-hoodie-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="full-sleeve" data-sizes="xs,s,m" data-designs="solid">
+                        <img src="full sleeve top woman.webp" alt="Women's Full Sleeve Top">
+                        <h3>Women's Full Sleeve Top</h3>
+                        <p class="product-description">Elegant full sleeve top for a chic look.</p>
+                        <p class="price">Price: ₹340</p>
+                        <a href="product-detail.html?productId=womens-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="s,m,l" data-designs="solid">
+                        <img src="printed fullsleeve woman.webp" alt="Women's Printed Full Sleeve">
+                        <h3>Women's Printed Full Sleeve</h3>
+                        <p class="product-description">Full sleeve top with a stylish print.</p>
+                        <p class="price">Price: ₹360</p>
+                        <a href="product-detail.html?productId=womens-printed-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-printed-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="xs,xl" data-designs="solid">
+                        <img src="ribbed full sleev woman.webp" alt="Women's Ribbed Full Sleeve">
+                        <h3>Women's Ribbed Full Sleeve</h3>
+                        <p class="product-description">Comfortable ribbed full sleeve top.</p>
+                        <p class="price">Price: ₹330</p>
+                        <a href="product-detail.html?productId=womens-ribbed-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-ribbed-fullsleeve-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="full-sleeve" data-sizes="s,m,l" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="casual full sleeve woman.webp" alt="Women's Casual Full Sleeve">
+                        <h3>Women's Casual Full Sleeve</h3>
+                        <p class="product-description">Perfect full sleeve top for casual outings.</p>
+                        <p class="price">Price: ₹370</p>
+                        <a href="product-detail.html?productId=womens-casual-fullsleeve-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-casual-fullsleeve-1')">Add to Cart</button>
+                    </div>
+
+                    <div class="product-card" data-category="sleeveless" data-sizes="xs,s,m" data-designs="solid">
+                        <img src="basic tank woman.avif" alt="Women's Basic Tank Top">
+                        <h3>Women's Basic Tank Top</h3>
+                        <p class="product-description">Versatile and comfortable tank top.</p>
+                        <p class="price">Price: ₹200</p>
+                        <a href="product-detail.html?productId=womens-sleeveless-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-sleeveless-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="s,m,l" data-designs="solid">
+                        <img src="spots tank woman.webp" alt="Women's Sports Tank">
+                        <h3>Women's Sports Tank</h3>
+                        <p class="product-description">Breathable tank top for active workouts.</p>
+                        <p class="price">Price: ₹240</p>
+                        <a href="product-detail.html?productId=womens-sports-tank-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-sports-tank-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="xs,xl" data-designs="solid">
+                        <img src="lace trim woman.webp" alt="Women's Lace Trim Tank">
+                        <h3>Women's Lace Trim Tank</h3>
+                        <p class="product-description">Elegant tank top with delicate lace trim.</p>
+                        <p class="price">Price: ₹260</p>
+                        <a href="product-detail.html?productId=womens-lace-tank-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-lace-tank-1')">Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="sleeveless" data-sizes="s,m,l" data-designs="solid">
+                        <span class="badge new">New</span>
+                        <img src="ribbed tank woman.avif" alt="Women's Ribbed Tank">
+                        <h3>Women's Ribbed Tank Top</h3>
+                        <p class="product-description">Stylish and comfortable ribbed tank top.</p>
+                        <p class="price">Price: ₹220</p>
+                        <a href="product-detail.html?productId=womens-ribbed-tank-1" class="btn btn-outline btn-details">View Product Details</a>
+                        <button class="btn btn-secondary" onclick="addToCart('womens-ribbed-tank-1')">Add to Cart</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main-content">
+                <div class="footer-left-section">
+                    <div class="footer-logo-text">WildTee</div>
+                    <div class="footer-links-wrapper">
+                        <div class="footer-link-col">
+                            <a href="why-us.html">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="contact-us.html">Contact Us</a>
+                            <a href="#">Press</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">FAQs</a>
+                            <a href="#">Track Order</a>
+                            <a href="#">Shipping Policy</a>
+                            <a href="#">Return Policy</a>
+                        </div>
+                        <div class="footer-link-col">
+                            <a href="#">Community</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Gift Cards</a>
+                        </div>
+                    </div>
+                    <div class="footer-social-media-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-right-section">
+                    <p class="footer-newsletter-prompt">Get the freshest WildTee news</p>
+                    <form action="#" method="POST" class="footer-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email here" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="footer-newsletter-consent">
+                        <input type="checkbox" id="ageConsentFooterShopWomen" name="ageConsentFooter">
+                        <label for="ageConsentFooterShopWomen">By checking the box, you agree that you are at least 16 years of age.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-legal-links">
+                <span><a href="#">Website Terms</a></span>
+                <span><a href="#">Privacy Policy</a></span>
+                <span><a href="#">Accessibility Statement</a></span>
+                <span><a href="#">CA Transparency in Supply Chains Act</a></span>
+                <span><a href="#">Supplier Code of Conduct</a></span>
+                <span><a href="#">Marketing to Children</a></span>
+                <span><a href="#">Do Not Sell My Information</a></span>
+            </div>
+            <div class="footer-copyright-notice">
+                <p>&copy; 2025 WildTee. All rights reserved. WildTee HQ: Vadodara, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
